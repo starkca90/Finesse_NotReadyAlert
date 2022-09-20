@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+    <ModulePrefs title="NotReadyAlert"
+        description="NotReadyAlert">
+        <Require feature="settitle" />
+        <Require feature="dynamic-height" />
+        <Require feature="pubsub-2" />
+        <Require feature="setprefs" />
+        <Require feature="loadingindicator">
+            <Param name="manual-dismiss">false</Param>
+            <Param name="loading-timeout">10</Param>
+        </Require>
+    </ModulePrefs>
+
+    <Content type="html">
+        <![CDATA[
+            <!DOCTYPE html>
+            <!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+            <!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
+            <!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+            <!--[if gt IE 8]>      <html> <!--<![endif]-->
+            <head>
+                <!-- Styling -->
+                <link rel="stylesheet" href="bootstrap/2.3.2/css/bootstrap.min.css" type="text/css" />
+                <link rel="stylesheet" href="NotReadyAlert.css" type="text/css" />
+
+                <!-- jQuery -->
+                <script type="text/javascript" src="/desktop/assets/js/jquery.min.js"></script>
+
+                <!-- Bootstrap -->
+                <script type="text/javascript" src="bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+                <!-- Finesse Library -->
+                <script type="text/javascript" src="/desktop/assets/js/finesse.js"></script>
+            
+                <!-- Gadget Business Logic -->
+                <script type="text/javascript" src="NotReadyAlert.js"></script>
+            </head>
+
+            <body>
+                <div id="coastClearMsg" class="alert alert-success" style="display: none">
+                    <img src="no-see.png">&nbsp;&nbsp;<strong>All Clear.&nbsp;</strong>Coast is clear, you are not being monitored.
+                </div>
+                <div id="yourBeingWatchedMsg" class="alert alert-error" style="display: none">
+                    <img src="see.png">&nbsp;&nbsp;<strong>Caution!!!&nbsp;</strong>Somebody is listening to this conversation.  Be on your best behavior!
+                </div>
+            </body>
+            
+            <script type="text/javascript">
+                gadgets.HubSettings.onConnect = function () {
+                    finesse.modules.NotReadyAlert.init();
+                };
+            </script>
+        ]]>
+    </Content>
+</Module>
